@@ -28,12 +28,12 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     topic = msg.topic
     payload = msg.payload.decode()
-    if topic == 'sensors/sensor_low' and payload:
+    if topic == 'sensors/sensor_low' and payload == "True":
         print(str(datetime.datetime.now().time().strftime("%H:%M:%S")) + " Достигнут минимальный порог."
                                                                         " ***Включение насоса***")
         pump.set_state(True)
         client.publish("module:pump", pump.get_state())
-    elif topic == 'sensors/sensor_high' and payload:
+    elif topic == 'sensors/sensor_high' and payload == "True":
         print(str(datetime.datetime.now().time().strftime("%H:%M:%S")) + " Достигнут максимальный порог."
                                                                         " ***Выключение насоса***")
         pump.set_state(False)

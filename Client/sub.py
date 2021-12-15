@@ -18,7 +18,7 @@ def on_message(client, userdata, msg):
     topic = msg.topic
     payload = msg.payload.decode()
     if topic == 'module:pump':
-        if payload:
+        if payload == "True":
             print(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S") + " Нехватка воды в баке: включение насоса")
         else:
             print(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S") + " Бак наполнился: отключение насоса")
